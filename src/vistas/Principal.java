@@ -69,7 +69,7 @@ public class Principal extends javax.swing.JFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
-        vistaAlumnos va = new vistaAlumnos();
+        vistaAlumno va = new vistaAlumno();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(va);
         va.setVisible(true);
