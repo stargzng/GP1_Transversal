@@ -1,5 +1,5 @@
 package vistas;
-import com.mysql.jdbc.Connection;
+import java.sql.Connection;
 import entidades.Alumno;
 import persistencia.AlumnoData;
 import persistencia.miConexion;
