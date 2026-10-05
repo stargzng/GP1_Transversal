@@ -1,6 +1,6 @@
 package persistencia;
 
-import com.mysql.jdbc.Statement;
+import java.sql.Statement;
 import java.sql.ResultSet;
 import entidades.Alumno;
 import java.sql.PreparedStatement;
