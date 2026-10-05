@@ -71,7 +71,4 @@ public class Alumno {
     public String toString() {
         return "Alumno{" + "id=" + id + ", dni=" + dni + ", nombre=" + nombre + ", fechaNac=" + fechaNac + ", activo=" + activo + '}';
     }
-    
-    
-
 }
