@@ -8,6 +8,8 @@ import java.sql.Connection;
 import java.sql.Date;
 import java.sql.SQLException;
 import java.time.LocalDate;
+import java.util.ArrayList;
+import java.util.List;
 import javax.swing.JOptionPane;
 
 public class AlumnoData {
@@ -35,7 +37,7 @@ public class AlumnoData {
             ResultSet rs = stm.getGeneratedKeys();
 
             if (rs.next()) {
-                a.setId(rs.getInt(1)); //se le setea el id Auto generado por la BD...
+                a.setId(rs.getInt(1)); //se le setea el id autogenerado por la BD...
             }
 
             System.out.println("se agregaron " + aux + " alumnos a la Base de Datos");
@@ -151,5 +153,33 @@ public class AlumnoData {
         } catch (SQLException E) {
             JOptionPane.showMessageDialog(null, "Datos ingresados invalidos!");
         }
+    }
+    
+    public List<Alumno> ListarAlumnos(){
+        ArrayList<Alumno> alumnos = new ArrayList<>();
+        String SQL = "SELECT * FROM `alumno`";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ResultSet rs = ps.executeQuery();
+            
+            while (rs.next()) {                
+                
+                int id = rs.getInt("idAlumno");
+                String nombre = rs.getString("nombre");
+                int dni = rs.getInt("dni");
+                LocalDate fechaNac = rs.getDate("fecNac").toLocalDate();
+                boolean activo = rs.getBoolean("activo");
+                
+                Alumno alumno = new Alumno(id, dni, nombre, fechaNac, activo);
+                alumnos.add(alumno);
+                
+            }
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "No se encontraron alumnos");
+        }
+        
+        return alumnos;
     }
 }
