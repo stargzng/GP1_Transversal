@@ -4,7 +4,6 @@ import entidades.Alumno;
 import persistencia.AlumnoData;
 import persistencia.miConexion;
 import java.time.LocalDate;
-import java.util.ArrayList;
 
 
 public class Prueba {
@@ -23,34 +22,26 @@ public class Prueba {
 
     void conectar(Alumno alumno) {
         
+        //se guarda el alumno (INSERT)
+        alumnoData.guardarAlumno(alumno);
         
-        var List = alumnoData.ListarAlumnos();
-            
-        for (Alumno a : List) {
-            System.out.println(a.toString());
-        }
-        System.out.println("asdknasojdasond");
+        //se busca un alumno por ID (SELECT)
+        Alumno aux = alumnoData.buscarAlumno(alumno.getId()); 
+        System.out.println(aux.toString()); //se imprimen los datos del alumno consultado.
         
-//        //se guarda el alumno (INSERT)
-//        alumnoData.guardarAlumno(alumno);
-//        
-//        //se busca un alumno por ID (SELECT)
-//        Alumno aux = alumnoData.buscarAlumno(alumno.getId()); 
-//        System.out.println(aux.toString()); //se imprimen los datos del alumno consultado.
-//        
-//        //Alta de alumno
-//        alumnoData.altaAlumno(alumno.getId());
-//        
-//        //Baja de alumno
-//        alumnoData.bajaAlumno(alumno.getId());
+        //Alta de alumno
+        alumnoData.altaAlumno(alumno.getId());
+        
+        //Baja de alumno
+        alumnoData.bajaAlumno(alumno.getId());
         
         //actualizar alumno
         alumnoData.actualizarDatos(25, 44722665, "Lando Norris", LocalDate.now(), true);
         
         //eliminar un alumno
-//        alumnoData.eliminarAlumno(23);
-//        alumnoData.eliminarAlumno(24);
-//        alumnoData.eliminarAlumno(26);
+        alumnoData.eliminarAlumno(23);
+        alumnoData.eliminarAlumno(24);
+        alumnoData.eliminarAlumno(26);
         
         
         

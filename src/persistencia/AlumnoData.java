@@ -70,6 +70,7 @@ public class AlumnoData {
                 boolean activo = rs.getBoolean("activo");
 
                 al = new Alumno(id, dni, nombre, nac, activo);
+                JOptionPane.showMessageDialog(null, "Alumno creado con exito");
 
             }
 
@@ -90,7 +91,7 @@ public class AlumnoData {
             ps.setInt(1, ID);
 
             int e = ps.executeUpdate();
-            System.out.println("se elimino " + e + " alumno de la base de datos");
+            JOptionPane.showMessageDialog(null, "Alumno eliminado con exito");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se encontró un alumno con el ID especificado " + e.getMessage());
@@ -145,41 +146,40 @@ public class AlumnoData {
             pm.setDate(3, Date.valueOf(fechaNacimiento));
             pm.setBoolean(4, activo);
             pm.setInt(5, ID);
-            
-            
+
             pm.executeUpdate();
             JOptionPane.showMessageDialog(null, "Alumno actualizado con exito!");
-            
+
         } catch (SQLException E) {
             JOptionPane.showMessageDialog(null, "Datos ingresados invalidos!");
         }
     }
-    
-    public List<Alumno> ListarAlumnos(){
+
+    public List<Alumno> ListarAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
         String SQL = "SELECT * FROM `alumno`";
-        
+
         try {
             PreparedStatement ps = connection.prepareStatement(SQL);
             ResultSet rs = ps.executeQuery();
-            
-            while (rs.next()) {                
-                
+
+            while (rs.next()) {
+
                 int id = rs.getInt("idAlumno");
                 String nombre = rs.getString("nombre");
                 int dni = rs.getInt("dni");
                 LocalDate fechaNac = rs.getDate("fecNac").toLocalDate();
                 boolean activo = rs.getBoolean("activo");
-                
+
                 Alumno alumno = new Alumno(id, dni, nombre, fechaNac, activo);
                 alumnos.add(alumno);
-                
+
             }
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "No se encontraron alumnos");
         }
-        
+
         return alumnos;
     }
 }
