@@ -234,7 +234,7 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             return;
         }
 
-        Principal.alumnoData.eliminarAlumno(Integer.valueOf(IDtxt.getText()));
+        Principal.alumnoData.eliminarAlumno(Integer.parseInt(IDtxt.getText()));
         limiarCampos();
 
     }//GEN-LAST:event_eliminarBTNActionPerformed

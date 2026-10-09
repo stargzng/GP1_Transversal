@@ -89,7 +89,8 @@ public class AlumnoData {
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, ID);
-
+            
+            ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Alumno eliminado con exito");
 
         } catch (SQLException e) {
@@ -106,7 +107,6 @@ public class AlumnoData {
             pm.setInt(1, ID);
 
             pm.executeUpdate();
-
             JOptionPane.showMessageDialog(null, "Se dio de alta al alumno correctamente!");
 
         } catch (SQLException e) {
