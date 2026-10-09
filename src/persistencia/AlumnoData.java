@@ -39,7 +39,7 @@ public class AlumnoData {
             if (rs.next()) {
                 a.setId(rs.getInt(1)); //se le setea el id autogenerado por la BD...
             }
-
+            JOptionPane.showMessageDialog(null, "Alumno creado con exito");
             System.out.println("se agregaron " + aux + " alumnos a la Base de Datos");
 
         } catch (SQLException exception) {
@@ -70,7 +70,7 @@ public class AlumnoData {
                 boolean activo = rs.getBoolean("activo");
 
                 al = new Alumno(id, dni, nombre, nac, activo);
-                JOptionPane.showMessageDialog(null, "Alumno creado con exito");
+                JOptionPane.showMessageDialog(null, "Alumno encontrado con exito");
 
             }
 
@@ -90,7 +90,6 @@ public class AlumnoData {
             PreparedStatement ps = connection.prepareStatement(sql);
             ps.setInt(1, ID);
 
-            int e = ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Alumno eliminado con exito");
 
         } catch (SQLException e) {
