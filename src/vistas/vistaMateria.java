@@ -1,5 +1,8 @@
 package vistas;
 
+import entidades.Materia;
+import javax.swing.JOptionPane;
+
 
 public class vistaMateria extends javax.swing.JInternalFrame {
 
@@ -13,11 +16,11 @@ public class vistaMateria extends javax.swing.JInternalFrame {
 
         btnGuardar = new javax.swing.JButton();
         btnEliminar = new javax.swing.JButton();
-        btnActualizar = new javax.swing.JButton();
+        btnModificar = new javax.swing.JButton();
         jpDatos = new javax.swing.JPanel();
         lblNombre = new javax.swing.JLabel();
         lblEstado = new javax.swing.JLabel();
-        jCheckBox1 = new javax.swing.JCheckBox();
+        jboxEstado = new javax.swing.JCheckBox();
         txtNombre = new javax.swing.JTextField();
         jpBuscar = new javax.swing.JPanel();
         lblID = new javax.swing.JLabel();
@@ -25,10 +28,13 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         btnBuscar = new javax.swing.JButton();
 
         btnGuardar.setText("GUARDAR");
+        btnGuardar.addActionListener(this::btnGuardarActionPerformed);
 
         btnEliminar.setText("ELIMINAR");
+        btnEliminar.addActionListener(this::btnEliminarActionPerformed);
 
-        btnActualizar.setText("ACTUALIZAR");
+        btnModificar.setText("MODIFICAR");
+        btnModificar.addActionListener(this::btnModificarActionPerformed);
 
         jpDatos.setBorder(javax.swing.BorderFactory.createTitledBorder(""));
 
@@ -47,9 +53,9 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                     .addComponent(lblNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 57, javax.swing.GroupLayout.PREFERRED_SIZE))
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(jpDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
-                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)
-                    .addComponent(jCheckBox1))
-                .addContainerGap(111, Short.MAX_VALUE))
+                    .addComponent(jboxEstado)
+                    .addComponent(txtNombre, javax.swing.GroupLayout.PREFERRED_SIZE, 107, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addContainerGap(68, Short.MAX_VALUE))
         );
         jpDatosLayout.setVerticalGroup(
             jpDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -61,7 +67,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                 .addGap(18, 18, 18)
                 .addGroup(jpDatosLayout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(lblEstado)
-                    .addComponent(jCheckBox1))
+                    .addComponent(jboxEstado))
                 .addContainerGap(24, Short.MAX_VALUE))
         );
 
@@ -70,6 +76,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
         lblID.setText("ID:");
 
         btnBuscar.setText("Buscar");
+        btnBuscar.addActionListener(this::btnBuscarActionPerformed);
 
         javax.swing.GroupLayout jpBuscarLayout = new javax.swing.GroupLayout(jpBuscar);
         jpBuscar.setLayout(jpBuscarLayout);
@@ -110,7 +117,7 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                                 .addGap(18, 18, 18)
                                 .addComponent(btnEliminar)
                                 .addGap(18, 18, 18)
-                                .addComponent(btnActualizar))))
+                                .addComponent(btnModificar))))
                     .addGroup(layout.createSequentialGroup()
                         .addGap(55, 55, 55)
                         .addComponent(jpBuscar, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE)))
@@ -127,20 +134,95 @@ public class vistaMateria extends javax.swing.JInternalFrame {
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(btnGuardar)
                     .addComponent(btnEliminar)
-                    .addComponent(btnActualizar))
+                    .addComponent(btnModificar))
                 .addGap(25, 25, 25))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void btnBuscarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnBuscarActionPerformed
+        try{
+            int id = Integer.parseInt(txtId.getText().trim());
+            Materia mat = Principal.materiaData.buscarMateria(id);
+
+            if (mat == null) {
+                JOptionPane.showMessageDialog(this, "No se encontró una materia con ese ID");
+                limpiarCampos();
+            }else{
+                txtNombre.setText(mat.getNombre());
+                jboxEstado.setSelected(mat.getEstado());
+            }
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this,"Ingresá un ID valido. Error: "+e.getMessage());
+        }
+    }//GEN-LAST:event_btnBuscarActionPerformed
+
+    private void btnModificarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnModificarActionPerformed
+        try{
+            int id = Integer.parseInt(txtId.getText().trim());
+            String nombre = txtNombre.getText().trim();
+            boolean estado = jboxEstado.isSelected();
+            
+            if (nombre.isEmpty()) {
+                JOptionPane.showMessageDialog(this, "Ingrese el nombre de la materia.");
+                return;
+            }
+            
+            Materia mat = Principal.materiaData.buscarMateria(id);
+            
+            if (mat == null) {
+                JOptionPane.showMessageDialog(this, "No se encontro una materia con ese ID");
+                return;
+            }
+            
+            Principal.materiaData.actualizarMateria(id, nombre, estado);
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingresá un ID valido. ERROR: "+e.getMessage());
+        }
+    }//GEN-LAST:event_btnModificarActionPerformed
+
+    private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
+        String nombre = txtNombre.getText().trim();
+        boolean estado = jboxEstado.isSelected();
+        
+        if (nombre.isEmpty()) {
+            JOptionPane.showMessageDialog(this, "Ingrese el nombre de la materia.");
+            return;
+        }
+        
+        Materia mat = new Materia(nombre, estado);
+        
+        Principal.materiaData.guardarMateria(mat);
+        
+        limpiarCampos();
+    }//GEN-LAST:event_btnGuardarActionPerformed
+
+    private void btnEliminarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnEliminarActionPerformed
+        try{
+            int id = Integer.parseInt(txtId.getText().trim());
+            Materia mat = Principal.materiaData.buscarMateria(id);
+            
+            if (mat == null) {
+                JOptionPane.showMessageDialog(this, "No se encontro una materia con ese ID");
+                return;
+            }
+            
+            Principal.materiaData.eliminarMateria(id);
+            
+            limpiarCampos();
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingresá un ID valido. ERROR: "+e.getMessage());
+        }
+    }//GEN-LAST:event_btnEliminarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton btnActualizar;
     private javax.swing.JButton btnBuscar;
     private javax.swing.JButton btnEliminar;
     private javax.swing.JButton btnGuardar;
-    private javax.swing.JCheckBox jCheckBox1;
+    private javax.swing.JButton btnModificar;
+    private javax.swing.JCheckBox jboxEstado;
     private javax.swing.JPanel jpBuscar;
     private javax.swing.JPanel jpDatos;
     private javax.swing.JLabel lblEstado;
@@ -149,4 +231,10 @@ public class vistaMateria extends javax.swing.JInternalFrame {
     private javax.swing.JTextField txtId;
     private javax.swing.JTextField txtNombre;
     // End of variables declaration//GEN-END:variables
+    
+    private void limpiarCampos() {
+        txtId.setText("");
+        txtNombre.setText("");
+        jboxEstado.setSelected(false);
+    }
 }
