@@ -1,6 +1,6 @@
 /*
  * Click nbfs://nbhost/SystemFileSystem/Templates/Licenses/license-default.txt to change this license
- * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JFrame.java to edit this template
+ * Click nbfs://nbhost/SystemFileSystem/Templates/GUIForms/JInternalFrame.java to edit this template
  */
 package vistas;
 
@@ -8,9 +8,7 @@ package vistas;
  *
  * @author Centeno-Net
  */
-public class vistaInscripcion extends javax.swing.JFrame {
-    
-    private static final java.util.logging.Logger logger = java.util.logging.Logger.getLogger(vistaInscripcion.class.getName());
+public class vistaInscripcion extends javax.swing.JInternalFrame {
 
     /**
      * Creates new form vistaInscripcion
@@ -28,33 +26,23 @@ public class vistaInscripcion extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
-        jLabelAlumno = new javax.swing.JLabel();
-        jComregistroAlumno = new javax.swing.JComboBox<>();
-        jRbtninscriptas = new javax.swing.JRadioButton();
+        jLbalumno = new javax.swing.JLabel();
+        jCbseleccion = new javax.swing.JComboBox<>();
         jRbtnNoinscriptas = new javax.swing.JRadioButton();
-        jBtninscribir = new javax.swing.JButton();
-        jBtnAnularinscripcion = new javax.swing.JButton();
-        jBtnsalir = new javax.swing.JButton();
+        jRbtninscriptas = new javax.swing.JRadioButton();
         jScrollPane1 = new javax.swing.JScrollPane();
         jTable1 = new javax.swing.JTable();
+        jBtninscribir = new javax.swing.JButton();
+        jBtnanular = new javax.swing.JButton();
+        jBtnsalir = new javax.swing.JButton();
 
-        setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
+        jLbalumno.setText("Selecciona Alumno:");
 
-        jLabelAlumno.setText("Seleccion Alumno:");
-
-        jComregistroAlumno.addActionListener(this::jComregistroAlumnoActionPerformed);
+        jRbtnNoinscriptas.setText("Materias No Inscriptas");
+        jRbtnNoinscriptas.addActionListener(this::jRbtnNoinscriptasActionPerformed);
 
         jRbtninscriptas.setText("Materias Inscriptas");
         jRbtninscriptas.addActionListener(this::jRbtninscriptasActionPerformed);
-
-        jRbtnNoinscriptas.setText("Materias  No Inscriptas");
-        jRbtnNoinscriptas.addActionListener(this::jRbtnNoinscriptasActionPerformed);
-
-        jBtninscribir.setText("Inscribir");
-
-        jBtnAnularinscripcion.setText("Anular Inscripcion");
-
-        jBtnsalir.setText("Salir");
 
         jTable1.setModel(new javax.swing.table.DefaultTableModel(
             new Object [][] {
@@ -69,6 +57,14 @@ public class vistaInscripcion extends javax.swing.JFrame {
         ));
         jScrollPane1.setViewportView(jTable1);
 
+        jBtninscribir.setText("Inscribir");
+        jBtninscribir.addActionListener(this::jBtninscribirActionPerformed);
+
+        jBtnanular.setText("Anular Inscripcion");
+        jBtnanular.addActionListener(this::jBtnanularActionPerformed);
+
+        jBtnsalir.setText("Salir");
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -76,97 +72,73 @@ public class vistaInscripcion extends javax.swing.JFrame {
             .addGroup(layout.createSequentialGroup()
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addContainerGap()
-                        .addComponent(jLabelAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 106, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addGap(18, 18, 18)
-                        .addComponent(jComregistroAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, 209, javax.swing.GroupLayout.PREFERRED_SIZE))
+                        .addComponent(jLbalumno, javax.swing.GroupLayout.PREFERRED_SIZE, 128, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                        .addComponent(jCbseleccion, javax.swing.GroupLayout.PREFERRED_SIZE, 306, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(112, 112, 112)
+                        .addGap(163, 163, 163)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRbtnNoinscriptas)
-                            .addComponent(jRbtninscriptas))))
-                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
-            .addGroup(layout.createSequentialGroup()
-                .addGap(18, 18, 18)
-                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
+                            .addComponent(jRbtninscriptas)))
                     .addGroup(layout.createSequentialGroup()
-                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
-                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                        .addContainerGap()
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 524, javax.swing.GroupLayout.PREFERRED_SIZE))
                     .addGroup(layout.createSequentialGroup()
+                        .addContainerGap()
                         .addComponent(jBtninscribir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
-                        .addComponent(jBtnAnularinscripcion)
-                        .addGap(18, 18, 18)
-                        .addComponent(jBtnsalir)
-                        .addGap(83, 83, 83))))
+                        .addGap(37, 37, 37)
+                        .addComponent(jBtnanular)
+                        .addGap(38, 38, 38)
+                        .addComponent(jBtnsalir)))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
             .addGroup(layout.createSequentialGroup()
-                .addGap(23, 23, 23)
+                .addGap(11, 11, 11)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
-                    .addComponent(jLabelAlumno)
-                    .addComponent(jComregistroAlumno, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
-                .addGap(18, 18, 18)
+                    .addComponent(jLbalumno)
+                    .addComponent(jCbseleccion, javax.swing.GroupLayout.PREFERRED_SIZE, javax.swing.GroupLayout.DEFAULT_SIZE, javax.swing.GroupLayout.PREFERRED_SIZE))
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 18, Short.MAX_VALUE)
                 .addComponent(jRbtninscriptas)
-                .addGap(18, 18, 18)
-                .addComponent(jRbtnNoinscriptas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
-                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
                 .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
+                .addComponent(jRbtnNoinscriptas)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 145, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtninscribir)
-                    .addComponent(jBtnsalir)
-                    .addComponent(jBtnAnularinscripcion))
-                .addGap(158, 158, 158))
+                    .addComponent(jBtnanular)
+                    .addComponent(jBtnsalir))
+                .addGap(42, 42, 42))
         );
 
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jComregistroAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jComregistroAlumnoActionPerformed
+    private void jRbtnNoinscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRbtnNoinscriptasActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jComregistroAlumnoActionPerformed
+    }//GEN-LAST:event_jRbtnNoinscriptasActionPerformed
 
     private void jRbtninscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRbtninscriptasActionPerformed
         // TODO add your handling code here:
     }//GEN-LAST:event_jRbtninscriptasActionPerformed
 
-    private void jRbtnNoinscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRbtnNoinscriptasActionPerformed
+    private void jBtninscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtninscribirActionPerformed
         // TODO add your handling code here:
-    }//GEN-LAST:event_jRbtnNoinscriptasActionPerformed
+    }//GEN-LAST:event_jBtninscribirActionPerformed
 
-    /**
-     * @param args the command line arguments
-     */
-    public static void main(String args[]) {
-        /* Set the Nimbus look and feel */
-        //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
-        /* If Nimbus (introduced in Java SE 6) is not available, stay with the default look and feel.
-         * For details see http://download.oracle.com/javase/tutorial/uiswing/lookandfeel/plaf.html 
-         */
-        try {
-            for (javax.swing.UIManager.LookAndFeelInfo info : javax.swing.UIManager.getInstalledLookAndFeels()) {
-                if ("Nimbus".equals(info.getName())) {
-                    javax.swing.UIManager.setLookAndFeel(info.getClassName());
-                    break;
-                }
-            }
-        } catch (ReflectiveOperationException | javax.swing.UnsupportedLookAndFeelException ex) {
-            logger.log(java.util.logging.Level.SEVERE, null, ex);
-        }
-        //</editor-fold>
+    private void jBtnanularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnanularActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jBtnanularActionPerformed
 
-        /* Create and display the form */
-        java.awt.EventQueue.invokeLater(() -> new vistaInscripcion().setVisible(true));
-    }
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
-    private javax.swing.JButton jBtnAnularinscripcion;
+    private javax.swing.JButton jBtnanular;
     private javax.swing.JButton jBtninscribir;
     private javax.swing.JButton jBtnsalir;
-    private javax.swing.JComboBox<String> jComregistroAlumno;
-    private javax.swing.JLabel jLabelAlumno;
+    private javax.swing.JComboBox<String> jCbseleccion;
+    private javax.swing.JLabel jLbalumno;
     private javax.swing.JRadioButton jRbtnNoinscriptas;
     private javax.swing.JRadioButton jRbtninscriptas;
     private javax.swing.JScrollPane jScrollPane1;
