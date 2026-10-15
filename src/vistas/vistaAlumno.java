@@ -194,7 +194,7 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "No se encontro el alumno con el ID especificado", "Error", 2);
             return;
         } else {
-            IDtxt.setText(al.getId()+"");
+            IDtxt.setText(al.getId() + "");
             txtNombre.setText(al.getNombre());
             txtDNI.setText(al.getDni() + "");
             fechaJCC.setDate(java.sql.Date.valueOf(al.getFechaNac()));
@@ -221,9 +221,14 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
             JOptionPane.showMessageDialog(this, "Complete todos los campos!", "Error", 2);
             return;
         } else {
-            Principal.alumnoData.guardarAlumno(extraerDatos());
-
+            
+            Alumno alumno = extraerDatos();
+            if (alumno==null) return;
+            
+            Principal.alumnoData.guardarAlumno(alumno);
+            
         }
+        
         limiarCampos();
     }//GEN-LAST:event_nuevoBTNActionPerformed
 
@@ -260,13 +265,21 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
     // End of variables declaration//GEN-END:variables
 
     public Alumno extraerDatos() {
-        String nombre = txtNombre.getText();
-        int dni = Integer.valueOf(txtDNI.getText());
-        boolean activo = activoCheck.isSelected();
-        LocalDate fechaN = fechaJCC.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); //se convierte el Date a "Instant", que dispone de un metodo de parseo a LocalDate (antes, hay que especificar al instant el ZoneId)
 
-        Alumno al = new Alumno(dni, nombre, fechaN, activo);
-        return al;
+        try {
+
+            String nombre = txtNombre.getText();
+            int dni = Integer.valueOf(txtDNI.getText());
+            boolean activo = activoCheck.isSelected();
+            LocalDate fechaN = fechaJCC.getDate().toInstant().atZone(ZoneId.systemDefault()).toLocalDate(); //se convierte el Date a "Instant", que dispone de un metodo de parseo a LocalDate (antes, hay que especificar al instant el ZoneId)
+
+            Alumno al = new Alumno(dni, nombre, fechaN, activo);
+            return al;
+        } catch (NumberFormatException e) {
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos!", "error", 2);
+        }
+        
+        return null;
     }
 
     public Alumno extraerDatosID() {
@@ -303,7 +316,7 @@ public class vistaAlumno extends javax.swing.JInternalFrame {
     }
 
     public boolean validarCampos() {
-        
+
         if (txtNombre.getText().isEmpty() || txtDNI.getText().isEmpty()) {
             return false;
         }
