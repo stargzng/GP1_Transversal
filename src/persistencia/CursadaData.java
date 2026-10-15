@@ -98,6 +98,11 @@ public class CursadaData {
 
     public void cargarNotas(int nota, Alumno alumno, Materia materia){
         
+        if (!EstaInscripto(alumno, materia)) {
+            JOptionPane.showMessageDialog(null, "No se encontro la inscripcion!");
+            return;
+        }
+        
         String SQL = "UPDATE `cursada` SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
         
         try {
