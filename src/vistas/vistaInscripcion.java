@@ -35,6 +35,8 @@ public class vistaInscripcion extends javax.swing.JFrame {
         jBtninscribir = new javax.swing.JButton();
         jBtnAnularinscripcion = new javax.swing.JButton();
         jBtnsalir = new javax.swing.JButton();
+        jScrollPane1 = new javax.swing.JScrollPane();
+        jTable1 = new javax.swing.JTable();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -54,6 +56,19 @@ public class vistaInscripcion extends javax.swing.JFrame {
 
         jBtnsalir.setText("Salir");
 
+        jTable1.setModel(new javax.swing.table.DefaultTableModel(
+            new Object [][] {
+                {null, null, null},
+                {null, null, null},
+                {null, null, null},
+                {null, null, null}
+            },
+            new String [] {
+                "idMateria", "nombre", "estado"
+            }
+        ));
+        jScrollPane1.setViewportView(jTable1);
+
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
         layout.setHorizontalGroup(
@@ -69,15 +84,21 @@ public class vistaInscripcion extends javax.swing.JFrame {
                         .addGap(112, 112, 112)
                         .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                             .addComponent(jRbtnNoinscriptas)
-                            .addComponent(jRbtninscriptas)))
+                            .addComponent(jRbtninscriptas))))
+                .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+            .addGroup(layout.createSequentialGroup()
+                .addGap(18, 18, 18)
+                .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
                     .addGroup(layout.createSequentialGroup()
-                        .addGap(16, 16, 16)
+                        .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 321, javax.swing.GroupLayout.PREFERRED_SIZE)
+                        .addContainerGap(javax.swing.GroupLayout.DEFAULT_SIZE, Short.MAX_VALUE))
+                    .addGroup(layout.createSequentialGroup()
                         .addComponent(jBtninscribir)
-                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.UNRELATED)
+                        .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 11, Short.MAX_VALUE)
                         .addComponent(jBtnAnularinscripcion)
                         .addGap(18, 18, 18)
-                        .addComponent(jBtnsalir)))
-                .addContainerGap(61, Short.MAX_VALUE))
+                        .addComponent(jBtnsalir)
+                        .addGap(83, 83, 83))))
         );
         layout.setVerticalGroup(
             layout.createParallelGroup(javax.swing.GroupLayout.Alignment.LEADING)
@@ -90,12 +111,14 @@ public class vistaInscripcion extends javax.swing.JFrame {
                 .addComponent(jRbtninscriptas)
                 .addGap(18, 18, 18)
                 .addComponent(jRbtnNoinscriptas)
-                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 115, Short.MAX_VALUE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED, 15, Short.MAX_VALUE)
+                .addComponent(jScrollPane1, javax.swing.GroupLayout.PREFERRED_SIZE, 108, javax.swing.GroupLayout.PREFERRED_SIZE)
+                .addPreferredGap(javax.swing.LayoutStyle.ComponentPlacement.RELATED)
                 .addGroup(layout.createParallelGroup(javax.swing.GroupLayout.Alignment.BASELINE)
                     .addComponent(jBtninscribir)
-                    .addComponent(jBtnAnularinscripcion)
-                    .addComponent(jBtnsalir))
-                .addGap(39, 39, 39))
+                    .addComponent(jBtnsalir)
+                    .addComponent(jBtnAnularinscripcion))
+                .addGap(158, 158, 158))
         );
 
         pack();
@@ -146,5 +169,7 @@ public class vistaInscripcion extends javax.swing.JFrame {
     private javax.swing.JLabel jLabelAlumno;
     private javax.swing.JRadioButton jRbtnNoinscriptas;
     private javax.swing.JRadioButton jRbtninscriptas;
+    private javax.swing.JScrollPane jScrollPane1;
+    private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
 }
