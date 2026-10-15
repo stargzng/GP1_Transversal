@@ -23,11 +23,21 @@ public class Principal extends javax.swing.JFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        jMenuBar2 = new javax.swing.JMenuBar();
+        jMenu2 = new javax.swing.JMenu();
+        jMenu3 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
         jMenu1 = new javax.swing.JMenu();
         jMenuItem1 = new javax.swing.JMenuItem();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenu4 = new javax.swing.JMenu();
+        jMenuItem3 = new javax.swing.JMenuItem();
+
+        jMenu2.setText("File");
+        jMenuBar2.add(jMenu2);
+
+        jMenu3.setText("Edit");
+        jMenuBar2.add(jMenu3);
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -44,17 +54,21 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 527, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Administrar");
+        jMenu1.setText("Alumnos");
 
-        jMenuItem1.setText("Alumnos");
+        jMenuItem1.setText("Administrar Alumnos");
         jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
         jMenu1.add(jMenuItem1);
 
-        jMenuItem2.setText("Materias");
-        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
-        jMenu1.add(jMenuItem2);
-
         jMenuBar1.add(jMenu1);
+
+        jMenu4.setText("Materias");
+
+        jMenuItem3.setText("Administrar Materias");
+        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
+        jMenu4.add(jMenuItem3);
+
+        jMenuBar1.add(jMenu4);
 
         setJMenuBar(jMenuBar1);
 
@@ -80,12 +94,12 @@ public class Principal extends javax.swing.JFrame {
         va.setVisible(true);
     }//GEN-LAST:event_jMenuItem1ActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
-        vistaMateria va = new vistaMateria();
+    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+        vistaMateria vm = new vistaMateria();
         jDesktopPane1.removeAll();
-        jDesktopPane1.add(va);
-        va.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+        jDesktopPane1.add(vm);
+        vm.setVisible(true);
+    }//GEN-LAST:event_jMenuItem3ActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -110,8 +124,12 @@ public class Principal extends javax.swing.JFrame {
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
     private javax.swing.JMenu jMenu1;
+    private javax.swing.JMenu jMenu2;
+    private javax.swing.JMenu jMenu3;
+    private javax.swing.JMenu jMenu4;
     private javax.swing.JMenuBar jMenuBar1;
+    private javax.swing.JMenuBar jMenuBar2;
     private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
+    private javax.swing.JMenuItem jMenuItem3;
     // End of variables declaration//GEN-END:variables
 }
