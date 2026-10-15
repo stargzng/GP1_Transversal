@@ -28,12 +28,12 @@ public class Principal extends javax.swing.JFrame {
         jMenu3 = new javax.swing.JMenu();
         jDesktopPane1 = new javax.swing.JDesktopPane();
         jMenuBar1 = new javax.swing.JMenuBar();
-        jMenu1 = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
-        jMenu4 = new javax.swing.JMenu();
-        jMenuItem3 = new javax.swing.JMenuItem();
-        jMenu5 = new javax.swing.JMenu();
-        jMenuItem2 = new javax.swing.JMenuItem();
+        jMenuAlumno = new javax.swing.JMenu();
+        jmiFormAlumno = new javax.swing.JMenuItem();
+        jMenuMateria = new javax.swing.JMenu();
+        jmiFormMateria = new javax.swing.JMenuItem();
+        jMenuInscripcion = new javax.swing.JMenu();
+        jmiListaInscripcion = new javax.swing.JMenuItem();
 
         jMenu2.setText("File");
         jMenuBar2.add(jMenu2);
@@ -56,29 +56,29 @@ public class Principal extends javax.swing.JFrame {
             .addGap(0, 527, Short.MAX_VALUE)
         );
 
-        jMenu1.setText("Alumnos");
+        jMenuAlumno.setText("Alumnos");
 
-        jMenuItem1.setText("Administrar Alumnos");
-        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
-        jMenu1.add(jMenuItem1);
+        jmiFormAlumno.setText("Administrar Alumnos");
+        jmiFormAlumno.addActionListener(this::jmiFormAlumnoActionPerformed);
+        jMenuAlumno.add(jmiFormAlumno);
 
-        jMenuBar1.add(jMenu1);
+        jMenuBar1.add(jMenuAlumno);
 
-        jMenu4.setText("Materias");
+        jMenuMateria.setText("Materias");
 
-        jMenuItem3.setText("Administrar Materias");
-        jMenuItem3.addActionListener(this::jMenuItem3ActionPerformed);
-        jMenu4.add(jMenuItem3);
+        jmiFormMateria.setText("Administrar Materias");
+        jmiFormMateria.addActionListener(this::jmiFormMateriaActionPerformed);
+        jMenuMateria.add(jmiFormMateria);
 
-        jMenuBar1.add(jMenu4);
+        jMenuBar1.add(jMenuMateria);
 
-        jMenu5.setText("Administrar inscripciones");
+        jMenuInscripcion.setText("Administrar inscripciones");
 
-        jMenuItem2.setText("Lista de inscripciones");
-        jMenuItem2.addActionListener(this::jMenuItem2ActionPerformed);
-        jMenu5.add(jMenuItem2);
+        jmiListaInscripcion.setText("Lista de inscripciones");
+        jmiListaInscripcion.addActionListener(this::jmiListaInscripcionActionPerformed);
+        jMenuInscripcion.add(jmiListaInscripcion);
 
-        jMenuBar1.add(jMenu5);
+        jMenuBar1.add(jMenuInscripcion);
 
         setJMenuBar(jMenuBar1);
 
@@ -97,26 +97,26 @@ public class Principal extends javax.swing.JFrame {
         setLocationRelativeTo(null);
     }// </editor-fold>//GEN-END:initComponents
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmiFormAlumnoActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFormAlumnoActionPerformed
         vistaAlumno va = new vistaAlumno();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(va);
         va.setVisible(true);
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmiFormAlumnoActionPerformed
 
-    private void jMenuItem3ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem3ActionPerformed
+    private void jmiFormMateriaActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiFormMateriaActionPerformed
         vistaMateria vm = new vistaMateria();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(vm);
         vm.setVisible(true);
-    }//GEN-LAST:event_jMenuItem3ActionPerformed
+    }//GEN-LAST:event_jmiFormMateriaActionPerformed
 
-    private void jMenuItem2ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem2ActionPerformed
+    private void jmiListaInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiListaInscripcionActionPerformed
         vistaListarInscripciones vli = new vistaListarInscripciones();
         jDesktopPane1.removeAll();
         jDesktopPane1.add(vli);
         vli.setVisible(true);
-    }//GEN-LAST:event_jMenuItem2ActionPerformed
+    }//GEN-LAST:event_jmiListaInscripcionActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -140,15 +140,15 @@ public class Principal extends javax.swing.JFrame {
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JDesktopPane jDesktopPane1;
-    private javax.swing.JMenu jMenu1;
     private javax.swing.JMenu jMenu2;
     private javax.swing.JMenu jMenu3;
-    private javax.swing.JMenu jMenu4;
-    private javax.swing.JMenu jMenu5;
+    private javax.swing.JMenu jMenuAlumno;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenuBar jMenuBar2;
-    private javax.swing.JMenuItem jMenuItem1;
-    private javax.swing.JMenuItem jMenuItem2;
-    private javax.swing.JMenuItem jMenuItem3;
+    private javax.swing.JMenu jMenuInscripcion;
+    private javax.swing.JMenu jMenuMateria;
+    private javax.swing.JMenuItem jmiFormAlumno;
+    private javax.swing.JMenuItem jmiFormMateria;
+    private javax.swing.JMenuItem jmiListaInscripcion;
     // End of variables declaration//GEN-END:variables
 }

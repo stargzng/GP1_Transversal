@@ -1,6 +1,6 @@
 package entidades;
 
-public class Cursada {
+public class Inscripcion {
 
     private int idCursada;
     private double nota;
@@ -11,7 +11,7 @@ public class Cursada {
     private Materia materia;
 
     
-    public Cursada(double nota, double asistencia, int año, Alumno alumno, Materia materia) {
+    public Inscripcion(double nota, double asistencia, int año, Alumno alumno, Materia materia) {
         this.nota = nota;
         this.asistencia = asistencia;
         this.año = año;
@@ -19,7 +19,7 @@ public class Cursada {
         this.materia = materia;
     }
     
-    public Cursada(int idCursada, double nota, double asistencia, int año, Alumno alumno, Materia materia) {
+    public Inscripcion(int idCursada, double nota, double asistencia, int año, Alumno alumno, Materia materia) {
         this.idCursada = idCursada;
         this.nota = nota;
         this.asistencia = asistencia;

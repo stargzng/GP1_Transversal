@@ -5,20 +5,20 @@ import java.sql.Statement;
 import java.sql.Connection;
 import java.sql.ResultSet;
 import entidades.Alumno;
-import entidades.Cursada;
+import entidades.Inscripcion;
 import entidades.Materia;
 import java.sql.SQLException;
 import javax.swing.JOptionPane;
 
-public class CursadaData {
+public class InscripcionData {
 
     private Connection connection;
 
-    public CursadaData(miConexion miConexion) {
+    public InscripcionData(miConexion miConexion) {
         connection = miConexion.initConnection();
     }
 
-    public Cursada inscribirAlumno(Cursada cursada) {
+    public Inscripcion inscribirAlumno(Inscripcion cursada) {
 
         if (EstaInscripto(cursada.getAlumno(), cursada.getMateria())) {
             JOptionPane.showMessageDialog(null, "El alumno ya esta incripto en esa materia!");
