@@ -2,6 +2,7 @@ package vistas;
 import java.sql.Connection;
 import entidades.Alumno;
 import persistencia.AlumnoData;
+import persistencia.InscripcionData;
 import persistencia.MateriaData;
 import persistencia.miConexion;
 
@@ -11,12 +12,14 @@ public class Principal extends javax.swing.JFrame {
     public static miConexion connection;
     public static AlumnoData alumnoData;
     public static MateriaData materiaData;
+    public static InscripcionData cursadaData;
     
     public Principal() {
         initComponents();
         connection = new miConexion("jdbc:mysql://localhost:3306/universidad", "root", "");
         alumnoData = new AlumnoData(connection);
         materiaData = new MateriaData(connection);
+        cursadaData = new InscripcionData(connection);
     }
 
     @SuppressWarnings("unchecked")

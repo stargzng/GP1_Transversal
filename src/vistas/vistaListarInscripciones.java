@@ -1,9 +1,10 @@
 package vistas;
 
 import entidades.Alumno;
+import entidades.Inscripcion;
 import java.util.ArrayList;
 import java.util.List;
-import javax.swing.DefaultComboBoxModel;
+import javax.swing.JOptionPane;
 import javax.swing.table.DefaultTableModel;
 
 
@@ -55,6 +56,7 @@ public DefaultTableModel modelo = new DefaultTableModel();
 
         Listar.setFont(new java.awt.Font("Arial", 1, 14)); // NOI18N
         Listar.setText("Listar");
+        Listar.addActionListener(this::ListarActionPerformed);
 
         javax.swing.GroupLayout jPanel1Layout = new javax.swing.GroupLayout(jPanel1);
         jPanel1.setLayout(jPanel1Layout);
@@ -107,6 +109,29 @@ public DefaultTableModel modelo = new DefaultTableModel();
         pack();
     }// </editor-fold>//GEN-END:initComponents
 
+    private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
+
+        ArrayList<Inscripcion> cursadas = Principal.cursadaData.listarCursada((Alumno) AlumnoCMB.getSelectedItem());
+        
+        if (cursadas == null) {
+            JOptionPane.showMessageDialog(null, "No se encontraron inscripciones para el alumno indicado!");
+            return;
+        }
+        
+        
+        
+        for (Inscripcion cursada : cursadas) {
+            System.out.println(cursada.getAlumno().getNombre());
+        }
+        
+        
+        for (Inscripcion cursada : cursadas) {
+            modelo.addRow( new Object[] {cursada.getAlumno().getNombre(), cursada.getMateria().getNombre()});
+        }
+        
+        
+    }//GEN-LAST:event_ListarActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JComboBox<Alumno> AlumnoCMB;
@@ -129,4 +154,8 @@ public DefaultTableModel modelo = new DefaultTableModel();
     }
 
 
+    public void initTable(){
+        JTable.setModel(modelo);
+    }
+    
 }

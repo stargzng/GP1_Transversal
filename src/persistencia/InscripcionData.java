@@ -8,6 +8,7 @@ import entidades.Alumno;
 import entidades.Inscripcion;
 import entidades.Materia;
 import java.sql.SQLException;
+import java.util.ArrayList;
 import javax.swing.JOptionPane;
 
 public class InscripcionData {
@@ -45,7 +46,7 @@ public class InscripcionData {
                 cursada.setIdCursada(rs.getInt(1));
             }
 
-            JOptionPane.showMessageDialog(null, "Se inscribio al alumno correctamente \nId de cursada: "+cursada.getIdCursada());
+            JOptionPane.showMessageDialog(null, "Se inscribio al alumno correctamente \nId de cursada: " + cursada.getIdCursada());
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, e.getMessage(), "Error", 2);
@@ -96,32 +97,68 @@ public class InscripcionData {
 
     }
 
-    public void cargarNotas(int nota, Alumno alumno, Materia materia){
-        
+    public void cargarNotas(int nota, Alumno alumno, Materia materia) {
+
         if (!EstaInscripto(alumno, materia)) {
             JOptionPane.showMessageDialog(null, "No se encontro la inscripcion!");
             return;
         }
-        
+
         String SQL = "UPDATE `cursada` SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
-        
+
         try {
             PreparedStatement ps = connection.prepareStatement(SQL);
             ps.setInt(1, nota);
             ps.setInt(2, alumno.getId());
             ps.setInt(3, materia.getId());
-            
+
             ps.executeUpdate();
             JOptionPane.showMessageDialog(null, "Nota actualizada ✔");
-            
+
         } catch (SQLException ex) {
             JOptionPane.showMessageDialog(null, "Corrobore los campos ID");
         }
-        
-        
-        
+
     }
-    
+
+    public ArrayList<Inscripcion> listarCursada(Alumno alumno) {
+
+        String SQL = "SELECT cursada.nota, cursada.asist, cursada.cursa, materia.idMateria, materia.nombre, materia.estado  FROM `cursada` INNER JOIN `materia` INNER JOIN `alumno`ON materia.idMateria = cursada.idMateria AND alumno.idAlumno =cursada.idAlumno WHERE alumno.idAlumno = ?;";
+
+        ArrayList<Inscripcion> cursadas = new ArrayList<>();
+
+        try {
+
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ps.setInt(1, alumno.getId());
+
+            ResultSet rs = ps.executeQuery();
+
+            if (!rs.next()) {
+                return null;
+            }
+
+            while (rs.next()) {
+                double nota = rs.getDouble("nota");
+                double asist = rs.getDouble("asist");
+                int año = rs.getInt("cursa");
+                int idMateria = rs.getInt("idMateria"); //para buscar la materia
+                String nombreMateria = rs.getString("nombre");
+                boolean estadoMateria = rs.getBoolean("estado");
+
+                Materia materia = new Materia(idMateria, nombreMateria, estadoMateria);
+
+                cursadas.add(new Inscripcion(nota, asist, año, alumno, materia));
+            }
+
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, ex.getMessage());
+        }
+
+        return cursadas;
+
+    }
+
     public boolean EstaInscripto(Alumno alumno, Materia materia) {
 
         try {

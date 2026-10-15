@@ -17,7 +17,7 @@ public class AlumnoData {
     private Connection connection = null;
 
     public AlumnoData(miConexion conexion) {
-        this.connection = conexion.initConnection();
+        this.connection = conexion.initConnection();   
     }
 
     public void guardarAlumno(Alumno a) { //DNI, NOMBRE, FECHA NAC, ACTIVO
