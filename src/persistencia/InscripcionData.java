@@ -134,9 +134,6 @@ public class InscripcionData {
 
             ResultSet rs = ps.executeQuery();
 
-            if (!rs.next()) {
-                return null;
-            }
 
             while (rs.next()) {
                 double nota = rs.getDouble("nota");

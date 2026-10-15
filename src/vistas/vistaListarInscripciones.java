@@ -16,6 +16,7 @@ public DefaultTableModel modelo = new DefaultTableModel();
     public vistaListarInscripciones() {
         initComponents();
         initCombo();
+        initTable();
     }
 
     @SuppressWarnings("unchecked")
@@ -111,18 +112,15 @@ public DefaultTableModel modelo = new DefaultTableModel();
 
     private void ListarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_ListarActionPerformed
 
+        modelo.setRowCount(0);
+        
         ArrayList<Inscripcion> cursadas = Principal.cursadaData.listarCursada((Alumno) AlumnoCMB.getSelectedItem());
         
-        if (cursadas == null) {
+        if (cursadas.isEmpty()) {
             JOptionPane.showMessageDialog(null, "No se encontraron inscripciones para el alumno indicado!");
             return;
         }
         
-        
-        
-        for (Inscripcion cursada : cursadas) {
-            System.out.println(cursada.getAlumno().getNombre());
-        }
         
         
         for (Inscripcion cursada : cursadas) {
@@ -156,6 +154,8 @@ public DefaultTableModel modelo = new DefaultTableModel();
 
     public void initTable(){
         JTable.setModel(modelo);
+        modelo.addColumn("Nombre");
+        modelo.addColumn("Materia");
     }
     
 }
