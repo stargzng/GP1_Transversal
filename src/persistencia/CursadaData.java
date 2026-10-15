@@ -96,6 +96,27 @@ public class CursadaData {
 
     }
 
+    public void cargarNotas(int nota, Alumno alumno, Materia materia){
+        
+        String SQL = "UPDATE `cursada` SET nota = ? WHERE idAlumno = ? AND idMateria = ?";
+        
+        try {
+            PreparedStatement ps = connection.prepareStatement(SQL);
+            ps.setInt(1, nota);
+            ps.setInt(2, alumno.getId());
+            ps.setInt(3, materia.getId());
+            
+            ps.executeUpdate();
+            JOptionPane.showMessageDialog(null, "Nota actualizada ✔");
+            
+        } catch (SQLException ex) {
+            JOptionPane.showMessageDialog(null, "Corrobore los campos ID");
+        }
+        
+        
+        
+    }
+    
     public boolean EstaInscripto(Alumno alumno, Materia materia) {
 
         try {
