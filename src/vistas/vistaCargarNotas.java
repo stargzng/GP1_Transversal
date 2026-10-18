@@ -9,14 +9,12 @@ import javax.swing.table.DefaultTableModel;
 
 public class vistaCargarNotas extends javax.swing.JInternalFrame {
 
-    public DefaultTableModel modelo = new DefaultTableModel(){
+    public DefaultTableModel modelo = new DefaultTableModel() {
         @Override
         public boolean isCellEditable(int row, int column) {
             return column == 2;
         }
-        
-        
-    
+
     };
 
     public vistaCargarNotas() {
@@ -165,18 +163,23 @@ public class vistaCargarNotas extends javax.swing.JInternalFrame {
     }//GEN-LAST:event_AlumnosCMBActionPerformed
 
     private void btnGuardarActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_btnGuardarActionPerformed
-        
-        try{
-        
-        double nota = (double) modelo.getValueAt(jTable1.getSelectedRow(), 2);
-        int codMateria = (int) modelo.getValueAt(jTable1.getSelectedRow(), 0);
-        
-        Materia materia = Principal.materiaData.buscarMateria(codMateria);
-        
-        Principal.cursadaData.cargarNotas(nota, (Alumno) AlumnosCMB.getSelectedItem(), materia);
-        }catch(ClassCastException e ){
-            JOptionPane.showMessageDialog(this, "Ingrese datos validos!","Error" , 2);
-        }
+
+        try {
+
+            Double nota = Double.valueOf((String) modelo.getValueAt(jTable1.getSelectedRow(), 2));
+            int codMateria = (int) modelo.getValueAt(jTable1.getSelectedRow(), 0);
+            
+            Materia materia = Principal.materiaData.buscarMateria(codMateria);
+
+
+            Principal.cursadaData.cargarNotas(nota, (Alumno) AlumnosCMB.getSelectedItem(), materia);
+        } catch (ArrayIndexOutOfBoundsException e) {
+            JOptionPane.showMessageDialog(this, "Primero seleccione una fila e ingrese una nota!", "Atencion", 2);
+        } catch (NumberFormatException e ){
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos!","Error",2);
+        } catch (ClassCastException e ){
+            JOptionPane.showMessageDialog(this, "Ingrese datos validos!","Error",2);
+        } 
     }//GEN-LAST:event_btnGuardarActionPerformed
 
 
@@ -214,12 +217,11 @@ public class vistaCargarNotas extends javax.swing.JInternalFrame {
     public void cargarDatos(Alumno alumno) {
 
         modelo.setRowCount(0);
-        
+
         ArrayList<Inscripcion> inscripcion = Principal.cursadaData.listarCursada(alumno);
-        
 
         for (Inscripcion i : inscripcion) {
-            modelo.addRow(new Object[]{ i.getMateria().getId(), i.getMateria().getNombre(), i.getNota()});
+            modelo.addRow(new Object[]{i.getMateria().getId(), i.getMateria().getNombre(), i.getNota()});
         }
 
     }
