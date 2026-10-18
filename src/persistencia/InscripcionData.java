@@ -97,7 +97,7 @@ public class InscripcionData {
 
     }
 
-    public void cargarNotas(int nota, Alumno alumno, Materia materia) {
+    public void cargarNotas(double nota, Alumno alumno, Materia materia) {
 
         if (!EstaInscripto(alumno, materia)) {
             JOptionPane.showMessageDialog(null, "No se encontro la inscripcion!");
@@ -108,7 +108,7 @@ public class InscripcionData {
 
         try {
             PreparedStatement ps = connection.prepareStatement(SQL);
-            ps.setInt(1, nota);
+            ps.setDouble(1, nota);
             ps.setInt(2, alumno.getId());
             ps.setInt(3, materia.getId());
 

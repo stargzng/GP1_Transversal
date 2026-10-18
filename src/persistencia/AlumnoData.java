@@ -153,7 +153,7 @@ public class AlumnoData {
         }
     }
 
-    public List<Alumno> ListarAlumnos() {
+    public ArrayList<Alumno> ListarAlumnos() {
         ArrayList<Alumno> alumnos = new ArrayList<>();
         String SQL = "SELECT * FROM `alumno`";
 
