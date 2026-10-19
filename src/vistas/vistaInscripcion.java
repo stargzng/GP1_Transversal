@@ -4,6 +4,10 @@
  */
 package vistas;
 
+import entidades.Alumno;
+import java.util.List;
+import javax.swing.ButtonGroup;
+
 /**
  *
  * @author Centeno-Net
@@ -15,6 +19,7 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
      */
     public vistaInscripcion() {
         initComponents();
+        cargarAlumnos();
     }
 
     /**
@@ -37,6 +42,8 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         jBtnsalir = new javax.swing.JButton();
 
         jLbalumno.setText("Selecciona Alumno:");
+
+        jCbseleccion.addActionListener(this::jCbseleccionActionPerformed);
 
         jRbtnNoinscriptas.setText("Materias No Inscriptas");
         jRbtnNoinscriptas.addActionListener(this::jRbtnNoinscriptasActionPerformed);
@@ -64,6 +71,7 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         jBtnanular.addActionListener(this::jBtnanularActionPerformed);
 
         jBtnsalir.setText("Salir");
+        jBtnsalir.addActionListener(this::jBtnsalirActionPerformed);
 
         javax.swing.GroupLayout layout = new javax.swing.GroupLayout(getContentPane());
         getContentPane().setLayout(layout);
@@ -132,6 +140,14 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         // TODO add your handling code here:
     }//GEN-LAST:event_jBtnanularActionPerformed
 
+    private void jCbseleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbseleccionActionPerformed
+        // TODO add your handling code here:
+    }//GEN-LAST:event_jCbseleccionActionPerformed
+
+    private void jBtnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnsalirActionPerformed
+        dispose();
+    }//GEN-LAST:event_jBtnsalirActionPerformed
+
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
     private javax.swing.JButton jBtnanular;
@@ -144,4 +160,14 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     private javax.swing.JScrollPane jScrollPane1;
     private javax.swing.JTable jTable1;
     // End of variables declaration//GEN-END:variables
+    
+    private void cargarAlumnos() {
+        jCbseleccion.removeAllItems();
+
+        List<Alumno> alumnos = Principal.alumnoData.ListarAlumnos();
+
+        for (Alumno alumno : alumnos) {
+            jCbseleccion.addItem(alumno.toString());
+        }
+    }
 }
