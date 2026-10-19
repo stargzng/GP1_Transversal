@@ -211,7 +211,7 @@ private InscripcionData inscripcionData;
     private javax.swing.JButton jBtnanular;
     private javax.swing.JButton jBtninscribir;
     private javax.swing.JButton jBtnsalir;
-    private javax.swing.JComboBox<String> jCbseleccion;
+    private javax.swing.JComboBox<Alumno> jCbseleccion;
     private javax.swing.JLabel jLbalumno;
     private javax.swing.JRadioButton jRbtnNoinscriptas;
     private javax.swing.JRadioButton jRbtninscriptas;
@@ -225,7 +225,7 @@ private InscripcionData inscripcionData;
         List<Alumno> alumnos = Principal.alumnoData.ListarAlumnos();
 
         for (Alumno alumno : alumnos) {
-            jCbseleccion.addItem(alumno.toString());
+            jCbseleccion.addItem(alumno);
         }
     }
     private void actualizarTabla() {
