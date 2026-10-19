@@ -20,17 +20,13 @@ import persistencia.miConexion;
  */
 public class vistaInscripcion extends javax.swing.JInternalFrame {
 
-    private InscripcionData inscripcionData;
     private DefaultTableModel modeloTabla;
-    private miConexion conexion;
 
     /**
      * Creates new form vistaInscripcion
      */
     public vistaInscripcion() {
         initComponents();
-        conexion = new miConexion("jdbc:mysql://localhost:3306/universidad", "root", "");
-        inscripcionData = new InscripcionData(conexion);
         modeloTabla = (DefaultTableModel) jTable1.getModel();
         cargarAlumnos();
         actualizarTabla();
@@ -172,7 +168,7 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         // Creo la inscripción con valores iniciales (nota 0, asistencia 0, año actual 2026)
         Inscripcion nuevaInscripcion = new Inscripcion(0.0, 0.0, 2026, alumnoSeleccionado, materiaSeleccionada);
 
-        inscripcionData.inscribirAlumno(nuevaInscripcion);
+        Principal.cursadaData.inscribirAlumno(nuevaInscripcion);
         actualizarTabla();
     }//GEN-LAST:event_jBtninscribirActionPerformed
 
@@ -190,12 +186,13 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
             return;
         }
 
-        int idMateria = (Integer) modeloTabla.getValueAt(filaSeleccionada, 0);
+        int idMateria = (int) modeloTabla.getValueAt(filaSeleccionada, 0);
 
-        List<Inscripcion> cursadas = inscripcionData.listarCursada(alumnoSeleccionado);
+        List<Inscripcion> cursadas = Principal.cursadaData.listarCursada(alumnoSeleccionado);
+        
         for (Inscripcion c : cursadas) {
             if (c.getMateria().getId() == idMateria) {
-                inscripcionData.eliminarCursada(c.getIdCursada());
+                Principal.cursadaData.eliminarCursada(c.getIdCursada());
                 break;
             }
         }
@@ -245,7 +242,7 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         if (seleccionado != null) {
             if (jRbtninscriptas.isSelected()) {
                 // Listamos las materias en las que están inscripto
-                List<Inscripcion> cursadas = inscripcionData.listarCursada(seleccionado);
+                List<Inscripcion> cursadas = Principal.cursadaData.listarCursada(seleccionado);
                 for (Inscripcion c : cursadas) {
                     modeloTabla.addRow(new Object[]{
                         c.getMateria().getId(),
@@ -256,11 +253,11 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
             } else {
 
                 List<Materia> inscriptas = new java.util.ArrayList<>();
-                for (Inscripcion c : inscripcionData.listarCursada(seleccionado)) {
+                for (Inscripcion c : Principal.cursadaData.listarCursada(seleccionado)) {
                     inscriptas.add(c.getMateria());
                 }
-
-                List<Materia> todasLasMaterias = new persistencia.MateriaData(conexion).obtenerMaterias();
+                
+                List<Materia> todasLasMaterias = Principal.materiaData.obtenerMaterias(); 
                 for (Materia m : todasLasMaterias) {
                     boolean esta = false;
                     for (Materia ins : inscriptas) {
