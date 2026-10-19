@@ -45,6 +45,7 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     // <editor-fold defaultstate="collapsed" desc="Generated Code">//GEN-BEGIN:initComponents
     private void initComponents() {
 
+        buttonGroup1 = new javax.swing.ButtonGroup();
         jLbalumno = new javax.swing.JLabel();
         jCbseleccion = new javax.swing.JComboBox<>();
         jRbtnNoinscriptas = new javax.swing.JRadioButton();
@@ -59,9 +60,11 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
         jCbseleccion.addActionListener(this::jCbseleccionActionPerformed);
 
+        buttonGroup1.add(jRbtnNoinscriptas);
         jRbtnNoinscriptas.setText("Materias No Inscriptas");
         jRbtnNoinscriptas.addActionListener(this::jRbtnNoinscriptasActionPerformed);
 
+        buttonGroup1.add(jRbtninscriptas);
         jRbtninscriptas.setText("Materias Inscriptas");
         jRbtninscriptas.addActionListener(this::jRbtninscriptasActionPerformed);
 
@@ -210,6 +213,7 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
 
     // Variables declaration - do not modify//GEN-BEGIN:variables
+    private javax.swing.ButtonGroup buttonGroup1;
     private javax.swing.JButton jBtnanular;
     private javax.swing.JButton jBtninscribir;
     private javax.swing.JButton jBtnsalir;
