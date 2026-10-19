@@ -66,7 +66,7 @@ public class InscripcionData {
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Se elimino el registro de la cursada");
+            JOptionPane.showMessageDialog(null, "Se elimino el registro de la cursada - " + idCursada + " ---");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se encontro una cursada con el ID indicado! " + e.getMessage(), "Error", 2);
