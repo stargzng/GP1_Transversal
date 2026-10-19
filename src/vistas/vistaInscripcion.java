@@ -5,21 +5,33 @@
 package vistas;
 
 import entidades.Alumno;
+import entidades.Inscripcion;
+import entidades.Materia;
 import java.util.List;
 import javax.swing.ButtonGroup;
+import javax.swing.JOptionPane;
+import javax.swing.table.DefaultTableModel;
+import persistencia.InscripcionData;
+import persistencia.miConexion;
 
 /**
  *
  * @author Centeno-Net
  */
 public class vistaInscripcion extends javax.swing.JInternalFrame {
-
+private InscripcionData inscripcionData;
+    private DefaultTableModel modeloTabla;
+    private miConexion conexion;
     /**
      * Creates new form vistaInscripcion
      */
     public vistaInscripcion() {
         initComponents();
+        conexion = new miConexion("jdbc:mysql://localhost:3306/universidad", "root", ""); 
+        inscripcionData = new InscripcionData(conexion);
+        modeloTabla = (DefaultTableModel) jTable1.getModel();
         cargarAlumnos();
+        actualizarTabla();
     }
 
     /**
@@ -125,23 +137,69 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
     }// </editor-fold>//GEN-END:initComponents
 
     private void jRbtnNoinscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRbtnNoinscriptasActionPerformed
-        // TODO add your handling code here:
+       actualizarTabla();
     }//GEN-LAST:event_jRbtnNoinscriptasActionPerformed
 
     private void jRbtninscriptasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jRbtninscriptasActionPerformed
-        // TODO add your handling code here:
+        actualizarTabla();
     }//GEN-LAST:event_jRbtninscriptasActionPerformed
 
     private void jBtninscribirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtninscribirActionPerformed
-        // TODO add your handling code here:
+        Alumno alumnoSeleccionado = (Alumno) jCbseleccion.getSelectedItem();
+        int filaSeleccionada = jTable1.getSelectedRow();
+
+        if (alumnoSeleccionado == null) {
+            JOptionPane.showMessageDialog(this, "Por favor, seleccione un alumno.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una materia de la tabla para inscribir.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int idMateria = (Integer) modeloTabla.getValueAt(filaSeleccionada, 0);
+        String nombreMateria = (String) modeloTabla.getValueAt(filaSeleccionada, 1);
+        boolean estadoMateria = modeloTabla.getValueAt(filaSeleccionada, 2).toString().equals("Activa");
+
+        Materia materiaSeleccionada = new Materia(idMateria, nombreMateria, estadoMateria);
+        
+        // Creo la inscripción con valores iniciales (nota 0, asistencia 0, año actual 2026)
+        Inscripcion nuevaInscripcion = new Inscripcion(0.0, 0.0, 2026, alumnoSeleccionado, materiaSeleccionada);
+        
+        inscripcionData.inscribirAlumno(nuevaInscripcion);
+        actualizarTabla();
     }//GEN-LAST:event_jBtninscribirActionPerformed
 
     private void jBtnanularActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnanularActionPerformed
-        // TODO add your handling code here:
+   Alumno alumnoSeleccionado = (Alumno) jCbseleccion.getSelectedItem();
+        int filaSeleccionada = jTable1.getSelectedRow();
+
+        if (alumnoSeleccionado == null) {
+            JOptionPane.showMessageDialog(this, "seleccione un alumno.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        if (filaSeleccionada == -1) {
+            JOptionPane.showMessageDialog(this, "Debe seleccionar una materia de la tabla para anular su inscripción.", "Advertencia", JOptionPane.WARNING_MESSAGE);
+            return;
+        }
+
+        int idMateria = (Integer) modeloTabla.getValueAt(filaSeleccionada, 0);
+        
+        List<Inscripcion> cursadas = inscripcionData.listarCursada(alumnoSeleccionado);
+        for (Inscripcion c : cursadas) {
+            if (c.getMateria().getId() == idMateria) {
+                inscripcionData.eliminarCursada(c.getIdCursada());
+                break;
+            }
+        }
+
+        actualizarTabla();
     }//GEN-LAST:event_jBtnanularActionPerformed
 
     private void jCbseleccionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jCbseleccionActionPerformed
-        // TODO add your handling code here:
+       actualizarTabla();
     }//GEN-LAST:event_jCbseleccionActionPerformed
 
     private void jBtnsalirActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jBtnsalirActionPerformed
@@ -168,6 +226,49 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
 
         for (Alumno alumno : alumnos) {
             jCbseleccion.addItem(alumno.toString());
+        }
+    }
+    private void actualizarTabla() {
+        if (modeloTabla == null) return;
+        modeloTabla.setRowCount(0); // Limpiar filas anteriores
+        Alumno seleccionado = (Alumno) jCbseleccion.getSelectedItem();
+
+        if (seleccionado != null) {
+            if (jRbtninscriptas.isSelected()) {
+                // Listamos las materias en las que están inscripto
+                List<Inscripcion> cursadas = inscripcionData.listarCursada(seleccionado);
+                for (Inscripcion c : cursadas) {
+                    modeloTabla.addRow(new Object[]{
+                        c.getMateria().getId(),
+                        c.getMateria().getNombre(),
+                        c.getMateria().getEstado() ? "Activa" : "Inactiva"
+                    });
+                }
+            } else {
+                
+                List<Materia> inscriptas = new java.util.ArrayList<>();
+                for (Inscripcion c : inscripcionData.listarCursada(seleccionado)) {
+                    inscriptas.add(c.getMateria());
+                }
+                
+                List<Materia> todasLasMaterias = new persistencia.MateriaData(conexion).obtenerMaterias(); 
+                for (Materia m : todasLasMaterias) {
+                    boolean esta = false;
+                    for (Materia ins : inscriptas) {
+                        if (ins.getId() == m.getId()) {
+                            esta = true;
+                            break;
+                        }
+                    }
+                    if (!esta) {
+                        modeloTabla.addRow(new Object[]{
+                            m.getId(),
+                            m.getNombre(),
+                            m.getEstado() ? "Activa" : "Inactiva"
+                        });
+                    }
+                }
+            }
         }
     }
 }
