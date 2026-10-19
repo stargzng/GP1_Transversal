@@ -177,6 +177,8 @@ public class vistaMateria extends javax.swing.JInternalFrame {
             }
             
             Principal.materiaData.actualizarMateria(id, nombre, estado);
+            
+            limpiarCampos();
         } catch (NumberFormatException e) {
             JOptionPane.showMessageDialog(this, "Ingresá un ID valido. ERROR: "+e.getMessage());
         }

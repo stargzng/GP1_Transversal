@@ -144,6 +144,8 @@ public class MateriaData {
 
             int e = ps.executeUpdate();
             System.out.println("Se eliminó " + e + " materia de la base de datos");
+            
+            JOptionPane.showMessageDialog(null, "Materia eliminada");
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se encontró una materia con el ID especificado: " + e.getMessage());

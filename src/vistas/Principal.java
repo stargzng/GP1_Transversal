@@ -35,8 +35,9 @@ public class Principal extends javax.swing.JFrame {
         jmiFormMateria = new javax.swing.JMenuItem();
         jMenuInscripcion = new javax.swing.JMenu();
         jmiListaInscripcion = new javax.swing.JMenuItem();
+        jmiInscripcion = new javax.swing.JMenuItem();
         jMenuNotas = new javax.swing.JMenu();
-        jMenuItem1 = new javax.swing.JMenuItem();
+        jmiCargarNotas = new javax.swing.JMenuItem();
 
         setDefaultCloseOperation(javax.swing.WindowConstants.EXIT_ON_CLOSE);
 
@@ -75,13 +76,17 @@ public class Principal extends javax.swing.JFrame {
         jmiListaInscripcion.addActionListener(this::jmiListaInscripcionActionPerformed);
         jMenuInscripcion.add(jmiListaInscripcion);
 
+        jmiInscripcion.setText("Inscripcion");
+        jmiInscripcion.addActionListener(this::jmiInscripcionActionPerformed);
+        jMenuInscripcion.add(jmiInscripcion);
+
         jMenuBar1.add(jMenuInscripcion);
 
         jMenuNotas.setText("Notas");
 
-        jMenuItem1.setText("Cargar Notas");
-        jMenuItem1.addActionListener(this::jMenuItem1ActionPerformed);
-        jMenuNotas.add(jMenuItem1);
+        jmiCargarNotas.setText("Cargar Notas");
+        jmiCargarNotas.addActionListener(this::jmiCargarNotasActionPerformed);
+        jMenuNotas.add(jmiCargarNotas);
 
         jMenuBar1.add(jMenuNotas);
 
@@ -127,14 +132,21 @@ public class Principal extends javax.swing.JFrame {
         vli.setVisible(true);
     }//GEN-LAST:event_jmiListaInscripcionActionPerformed
 
-    private void jMenuItem1ActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jMenuItem1ActionPerformed
+    private void jmiCargarNotasActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiCargarNotasActionPerformed
         jDesktopPane1.removeAll();
         vistaCargarNotas vc = new vistaCargarNotas();
         jDesktopPane1.add(vc);
         vc.setVisible(true);
         jDesktopPane1.revalidate();
         jDesktopPane1.repaint();
-    }//GEN-LAST:event_jMenuItem1ActionPerformed
+    }//GEN-LAST:event_jmiCargarNotasActionPerformed
+
+    private void jmiInscripcionActionPerformed(java.awt.event.ActionEvent evt) {//GEN-FIRST:event_jmiInscripcionActionPerformed
+        vistaInscripcion va  = new vistaInscripcion();
+        jDesktopPane1.removeAll();
+        jDesktopPane1.add(va);
+        va.setVisible(true);
+    }//GEN-LAST:event_jmiInscripcionActionPerformed
 
     public static void main(String args[]) {
         //<editor-fold defaultstate="collapsed" desc=" Look and feel setting code (optional) ">
@@ -161,11 +173,12 @@ public class Principal extends javax.swing.JFrame {
     private javax.swing.JMenu jMenuAlumno;
     private javax.swing.JMenuBar jMenuBar1;
     private javax.swing.JMenu jMenuInscripcion;
-    private javax.swing.JMenuItem jMenuItem1;
     private javax.swing.JMenu jMenuMateria;
     private javax.swing.JMenu jMenuNotas;
+    private javax.swing.JMenuItem jmiCargarNotas;
     private javax.swing.JMenuItem jmiFormAlumno;
     private javax.swing.JMenuItem jmiFormMateria;
+    private javax.swing.JMenuItem jmiInscripcion;
     private javax.swing.JMenuItem jmiListaInscripcion;
     // End of variables declaration//GEN-END:variables
 }
