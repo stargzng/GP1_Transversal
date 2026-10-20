@@ -42,22 +42,22 @@ public class MateriaData {
         }
     }
 
-    public Materia buscarMateria(int id) {
+    public Materia buscarMateria(int idMateria) {
         Materia materia = null;
         String sql = "SELECT * FROM materia WHERE idMateria = ?";
 
         try {
             PreparedStatement ps = connection.prepareStatement(sql);
-            ps.setInt(1, id);
+            ps.setInt(1, idMateria);
 
             ResultSet rs = ps.executeQuery();
 
             if (rs.next()) {
-                int idMateria = rs.getInt("idMateria");
+                int id = rs.getInt("idMateria");
                 String nombre = rs.getString("nombre");
                 boolean estado = rs.getBoolean("estado");
 
-                materia = new Materia(idMateria, nombre, estado);
+                materia = new Materia(id, nombre, estado);
             }
 
         } catch (SQLException ex) {

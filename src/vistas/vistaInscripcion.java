@@ -192,6 +192,7 @@ public class vistaInscripcion extends javax.swing.JInternalFrame {
         
         for (Inscripcion c : cursadas) {
             if (c.getMateria().getId() == idMateria) {
+                System.out.println("ID cursada: "+c.getIdCursada());
                 Principal.cursadaData.eliminarCursada(c.getIdCursada());
                 break;
             }

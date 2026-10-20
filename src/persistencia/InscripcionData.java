@@ -66,7 +66,7 @@ public class InscripcionData {
 
             ps.executeUpdate();
 
-            JOptionPane.showMessageDialog(null, "Se elimino el registro de la cursada - " + idCursada + " ---");
+            JOptionPane.showMessageDialog(null, "Se elimino el registro de la cursada - " + idCursada);
 
         } catch (SQLException e) {
             JOptionPane.showMessageDialog(null, "No se encontro una cursada con el ID indicado! " + e.getMessage(), "Error", 2);
@@ -123,7 +123,7 @@ public class InscripcionData {
 
     public ArrayList<Inscripcion> listarCursada(Alumno alumno) {
 
-        String SQL = "SELECT cursada.nota, cursada.asist, cursada.cursa, materia.idMateria, materia.nombre, materia.estado  FROM `cursada` INNER JOIN `materia` INNER JOIN `alumno`ON materia.idMateria = cursada.idMateria AND alumno.idAlumno =cursada.idAlumno WHERE alumno.idAlumno = ?;";
+        String SQL = "SELECT cursada.idCursada, cursada.nota, cursada.asist, cursada.cursa, materia.idMateria, materia.nombre, materia.estado  FROM `cursada` INNER JOIN `materia` INNER JOIN `alumno`ON materia.idMateria = cursada.idMateria AND alumno.idAlumno =cursada.idAlumno WHERE alumno.idAlumno = ?;";
 
         ArrayList<Inscripcion> cursadas = new ArrayList<>();
 
@@ -136,6 +136,7 @@ public class InscripcionData {
 
 
             while (rs.next()) {
+                int id = rs.getInt("idCursada");
                 double nota = rs.getDouble("nota");
                 double asist = rs.getDouble("asist");
                 int año = rs.getInt("cursa");
@@ -145,7 +146,7 @@ public class InscripcionData {
 
                 Materia materia = new Materia(idMateria, nombreMateria, estadoMateria);
 
-                cursadas.add(new Inscripcion(nota, asist, año, alumno, materia));
+                cursadas.add(new Inscripcion(id, nota, asist, año, alumno, materia));
             }
 
         } catch (SQLException ex) {
